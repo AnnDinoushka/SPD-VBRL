@@ -134,7 +134,7 @@ class Planets(object):
             file_name = self.__class__.__name__.lower() + '.gif'
         file_name = file_name
         print('Saving file {} ...'.format(file_name))
-        anim.save(file_name, writer='imagemagick')
+        anim.save(file_name, writer='ffmpeg')
         plt.close(fig)
 
     def assert_bodies_in_box(self):

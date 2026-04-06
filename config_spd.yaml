@@ -22,8 +22,8 @@ frame_stack: 3
 # global params
 lr: 1e-3
 batch_size: 128
-train_resource_files: /your_path/idealgas/*.mp4
-eval_resource_1_files: /your_path/idealgas/*.mp4
+train_resource_files: /full/path/to/SPD-VBRL/distractor/idealgas/*.mp4
+eval_resource_1_files: /full/path/to/SPD-VBRL/distractor/idealgas/*.mp4
 eval_resource_2_files: /your_path/resource_folder/driving_car/*.mp4
 train_img_source: video
 eval_img_1_source: video
