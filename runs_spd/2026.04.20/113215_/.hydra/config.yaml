@@ -1,0 +1,80 @@
+action_repeat: 2
+actor:
+  class: spd.Actor
+  params:
+    action_shape: ${agent.params.action_shape}
+    encoder_cfg: ${agent.params.encoder_cfg}
+    hidden_depth: 2
+    hidden_dim: 256
+    log_std_bounds:
+    - -10
+    - 2
+agent:
+  class: spd.SPDAgent
+  name: spd
+  params:
+    action_range: ???
+    action_shape: ???
+    actor_cfg: ${actor}
+    actor_update_frequency: 2
+    batch_size: ${batch_size}
+    critic_cfg: ${critic}
+    critic_target_update_frequency: 2
+    critic_tau: 0.01
+    device: ${device}
+    discount: 0.99
+    discriminator_cfg: ${discriminator}
+    encoder_cfg: ${encoder}
+    init_temperature: 0.1
+    inv_cfg: ${inv}
+    lr: ${lr}
+    obs_shape: ???
+batch_size: 128
+critic:
+  class: spd.Critic
+  params:
+    action_shape: ${agent.params.action_shape}
+    encoder_cfg: ${agent.params.encoder_cfg}
+    hidden_depth: 2
+    hidden_dim: 256
+device: cuda:0
+discriminator:
+  class: spd.Discriminator
+  params:
+    feature_dim: 50
+    hidden_depth: 2
+    hidden_dim: 256
+encoder:
+  class: spd.Encoder
+  params:
+    feature_dim: 50
+    obs_shape: ${agent.params.obs_shape}
+env: walker_walk
+eval_frequency: 5000
+eval_img_1_source: video
+eval_img_2_source: video
+eval_resource_1_files: d:/GitHub/SPD-VBRL/distractor/idealgas/*.mp4
+eval_resource_2_files: d:/GitHub/SPD-VBRL/distractor/idealgas/*.mp4
+frame_stack: 3
+image_pad: 4
+image_size: 84
+inv:
+  class: spd.InverseForwardDynamicsModel
+  params:
+    action_shape: ${agent.params.action_shape}
+    encoder_cfg: ${agent.params.encoder_cfg}
+    feature_dim: 50
+    hidden_dim: 256
+log_frequency_step: 10000
+log_save_tb: false
+lr: 0.001
+num_eval_episodes: 10
+num_seed_steps: 1000
+num_train_iters: 1
+num_train_steps: 510000
+replay_buffer_capacity: 100000
+save_video: false
+seed: 3
+total_frames: 1000
+train_img_source: video
+train_resource_files: d:/GitHub/SPD-VBRL/distractor/idealgas/*.mp4

@@ -1,0 +1,4 @@
+[2026-04-20 11:34:33,012][absl][INFO] - MUJOCO_GL is not set, so an OpenGL backend will be chosen automatically.
+[2026-04-20 11:34:33,054][absl][INFO] - Successfully imported OpenGL backend: glfw
+[2026-04-20 11:34:34,199][absl][INFO] - MuJoCo library version is: 2.3.7
+[2026-04-20 11:34:35,427][hydra.utils][ERROR] - Error instantiating spd.SPDAgent : Torch not compiled with CUDA enabled
