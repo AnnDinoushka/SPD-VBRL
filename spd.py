@@ -182,15 +182,15 @@ class SPDAgent(object):
         self.critic_target_update_frequency = critic_target_update_frequency
         self.batch_size = batch_size
 
-        self.actor = hydra.utils.instantiate(actor_cfg).to(self.device)
-        self.critic = hydra.utils.instantiate(critic_cfg).to(self.device)
-        self.critic_target = hydra.utils.instantiate(critic_cfg).to(self.device)
+        self.actor = hydra.utils.instantiate(actor_cfg, _recursive_=False).to(self.device)
+        self.critic = hydra.utils.instantiate(critic_cfg, _recursive_=False).to(self.device)
+        self.critic_target = hydra.utils.instantiate(critic_cfg, _recursive_=False).to(self.device)
         self.critic_target.load_state_dict(self.critic.state_dict())
 
         self.encoder = hydra.utils.instantiate(encoder_cfg).to(self.device)
         self.discriminator = hydra.utils.instantiate(discriminator_cfg).to(self.device)
 
-        self.inv = hydra.utils.instantiate(inv_cfg).to(self.device)
+        self.inv = hydra.utils.instantiate(inv_cfg, _recursive_=False).to(self.device)
         self.inv.encoder.copy_conv_weights_from(self.critic.encoder)
         self.encoder.copy_conv_weights_from(self.critic.encoder)
         

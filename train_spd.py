@@ -104,7 +104,7 @@ class Workspace(object):
         self.logger = Logger(self.work_dir,
                              save_tb=cfg.log_save_tb,
                              log_frequency=cfg.log_frequency_step,
-                             agent=cfg.agent.name,
+                             agent='spd',
                              action_repeat=cfg.action_repeat,
                              )
                              
@@ -117,13 +117,13 @@ class Workspace(object):
         self.eval_1_env = make_eval_1_env(cfg)
         self.eval_2_env = make_eval_2_env(cfg)
         
-        cfg.agent.params.obs_shape = self.env.observation_space.shape
-        cfg.agent.params.action_shape = self.env.action_space.shape
-        cfg.agent.params.action_range = [
+        cfg.agent.obs_shape = self.env.observation_space.shape
+        cfg.agent.action_shape = self.env.action_space.shape
+        cfg.agent.action_range = [
             float(self.env.action_space.low.min()),
             float(self.env.action_space.high.max())
         ]
-        self.agent = hydra.utils.instantiate(cfg.agent)
+        self.agent = hydra.utils.instantiate(cfg.agent, _recursive_=False)
 
         # adv
         self.replay_buffer = ReplayBuffer(self.env.observation_space.shape,
@@ -227,7 +227,7 @@ class Workspace(object):
             self.step += 1
 
 
-@hydra.main(config_path='config_spd.yaml', strict=True)
+@hydra.main(config_path='.', config_name='config_spd')
 def main(cfg):
     from train_spd import Workspace as W
     workspace = W(cfg)
